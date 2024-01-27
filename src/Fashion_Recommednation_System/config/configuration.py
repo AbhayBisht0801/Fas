@@ -3,6 +3,7 @@ from src.Fashion_Recommednation_System.utils.common import read_yaml,create_dire
 from src.Fashion_Recommednation_System.entity.config_entity import DataIngestionConfig
 from src.Fashion_Recommednation_System.entity.config_entity import PrepareBaseModelConfig
 from src.Fashion_Recommednation_System.entity.config_entity import TrainingConfig
+from src.Fashion_Recommednation_System.entity.config_entity import EvaluationConfig
 import os
 class ConfigurationManager:
     def __init__(
@@ -56,6 +57,15 @@ class ConfigurationManager:
             training_data=Path(training_data),
             saved_features=Path(training.saved_features))
         return training_config
+    def get_components(self)->EvaluationConfig:
+        components=EvaluationConfig(
+            path_of_model='artifacts/prepare_base_model/base_model_updated.h5',
+            training_data='artifacts/data_ingestion/data/data',
+            mlflow_uri='https://dagshub.com/AbhayBisht0801/Fashion-Recommendation-System.mlflow',
+            extract_feature='artifacts/training/extracted_feature.pkl',
+            
+        )
+        return components
     
 
     
