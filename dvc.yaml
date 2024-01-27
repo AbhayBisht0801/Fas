@@ -1,9 +1,0 @@
-stages:
-  data_ingestion:
-    cmd: python src\Fashion_Recommednation_System\pipeline\stage__01_data_ingestion.py
-    deps:
-      - src\Fashion_Recommednation_System\pipeline\stage__01_data_ingestion.py
-      - config/config.yaml
-    outs:
-      
-      - artifacts/data_ingestion
