@@ -55,14 +55,18 @@ class ConfigurationManager:
             root_dir=Path(training.root_dir),
             updated_base_model_path=Path(prepare_base_model.updated_base_model_path),
             training_data=Path(training_data),
-            saved_features=Path(training.saved_features))
+            saved_features=Path(training.saved_features),
+            image_paths=Path(training.image_paths))
         return training_config
+
+        
     def get_components(self)->EvaluationConfig:
         components=EvaluationConfig(
             path_of_model='artifacts/prepare_base_model/base_model_updated.h5',
             training_data='artifacts/data_ingestion/data/data',
             mlflow_uri='https://dagshub.com/AbhayBisht0801/Fashion-Recommendation-System.mlflow',
             extract_feature='artifacts/training/extracted_feature.pkl',
+            image_paths='artifacts/training/imagepaths.pkl'
             
         )
         return components

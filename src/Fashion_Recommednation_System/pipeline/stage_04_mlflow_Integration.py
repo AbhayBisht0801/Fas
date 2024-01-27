@@ -1,5 +1,5 @@
 from src.Fashion_Recommednation_System.config.configuration import ConfigurationManager
-from src.Fashion_Recommednation_System.mlfow_integration import Evaluation
+from src.Fashion_Recommednation_System.components.mlflow_integration import Evaluation
 from src.Fashion_Recommednation_System import logger
 import os
 

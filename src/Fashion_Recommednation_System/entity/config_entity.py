@@ -23,6 +23,16 @@ class TrainingConfig:
     training_data:Path
     updated_base_model_path:Path
     saved_features:Path
+    image_paths:Path
+
+@dataclass(frozen=True)
+class EvaluationConfig:
+    path_of_model:Path
+    training_data:Path
+    extract_feature:Path
+    image_paths:Path
+    mlflow_uri:str
+     
 
 
 

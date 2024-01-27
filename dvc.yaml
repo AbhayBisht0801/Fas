@@ -1,0 +1,40 @@
+stages:
+  data_ingestion:
+    cmd: python src/Fashion_Recommednation_System/pipeline/stage__01_data_ingestion.py
+    deps:
+      - src/Fashion_Recommednation_System/pipeline/stage__01_data_ingestion.py
+      - config/config.yaml
+    outs:
+      
+      - artifacts/data_ingestion
+  prepare_model:
+    cmd: python src/Fashion_Recommednation_System/pipeline/stage_02_prepare_model.py
+    deps:
+      - src/Fashion_Recommednation_System/pipeline/stage_02_prepare_model.py
+      - config/config.yaml
+    params:
+      - IMAGE_SIZE
+      - INCLUDE_TOP
+      - WEIGHTS
+      
+    outs:
+      - artifacts/prepare_base_model
+  training:
+    cmd: python src/Fashion_Recommednation_System/pipeline/stage_03_model_trainer.py
+    deps:
+      - src/Fashion_Recommednation_System/pipeline/stage_03_model_trainer.py
+      - config/config.yaml
+      - artifacts/data_ingestion/images
+      - artifacts/prepare_base_model
+    outs:
+      - artifacts/training/extracted_feature.pkl
+  mlflow_integration:
+    cmd: src\Fashion_Recommednation_System\pipeline\stage04__mlfow_integration.py
+    deps:
+      - src/Fashion_Recommednation_System/pipeline/stage04__mlfow_integration.py
+      - config/config.yaml
+      - artifacts/data_ingestion/data/data
+      - artifacts/data_ingestion/cuisine_updated.csv
+      - artifacts/training/extracted_feature.pkl
+  
+      

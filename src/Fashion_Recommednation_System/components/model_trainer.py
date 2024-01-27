@@ -4,6 +4,9 @@ from pathlib import Path
 from src.Fashion_Recommednation_System.entity.config_entity import TrainingConfig
 from src.Fashion_Recommednation_System.utils.common import feature_extraction,save_object
 import os
+import gc
+from tqdm import tqdm
+import time 
 class Training:
     def __init__(self,config:TrainingConfig):
         self.config=config
@@ -16,16 +19,12 @@ class Training:
         path=self.config.training_data
         for image_path in os.listdir(path):
             self.img_name.append(os.path.join(path,image_path))
+        save_object(file_path=self.config.image_paths,obj=self.img_name)
     
-
+    
     def extract_feature(self):
         feature_list=[]
         for image in self.img_name:
             features=feature_extraction(image,self.model)
             feature_list.append(features)
         save_object(file_path=self.config.saved_features,obj=feature_list)
-        
-        
-        
-
-    
